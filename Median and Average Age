@@ -12,10 +12,12 @@ ID	NAME	REGION	JOIN_DATE	SALARY	DOB (y-m-d)
 
 
 
-Q) Find out the median age and average age of all the employees.
+1) Find out the median age and average age of all the employees.
  
  WITH CTE AS 
 (SELECT *, DATEDIFF(‘YEAR’,DOB,CURRENT_DATE()) AS AGE FROM EMPLOYEE)        /* here age is calculated by datediff between DON and current date */
 SELECT 
 MEDIAN(AGE) , AVG(AGE) 
 FROM CTE ;
+
+
