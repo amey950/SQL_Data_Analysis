@@ -1,0 +1,16 @@
+ID     CITY
+101     MUMBAI
+202     PUNE
+303     NAGPUR
+404     NAGPUR
+505     BANGLORE
+606     CHENNAI
+
+/* this problem can be solved using group by or by windows function also , but here we are using self join */
+
+SELECT *
+FROM 
+EMPOPLYEE E1 , EMPLOYEE E2
+WHERE E1.CITY = E2.CITY
+AND
+E1.ID <> E2.ID ;
