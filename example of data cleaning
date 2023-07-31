@@ -1,0 +1,37 @@
+
+CREATE OR REPLACE TABLE monthly_sales(empid INT, dept TEXT, jan INT, feb INT, mar INT, april INT);
+
+INSERT INTO monthly_sales VALUES
+    (1, 'electronics', 100, 200, 300, 100),
+    (2, 'clothes', 100, 300, 150, 200),
+    (3, 'cars', 200, 400, 100, 50);
+
+empid  | dept         |  jan  | feb    | mar | april  |
+1      |  electronics |   100  |   200 |  300 |   100  |
+2      |   clothes    |   100  |   300  | 150  |  200   |
+3      |    cars      |    200  |   400 |  100  |   50   |
+
+ /*  this is a example of data in unclean format as here 4 separate columns are used for denoting monthly sales in 4 months
+ though it is easier to comprehend but very difficult to query Hence the 4 separete columns should me merged in one column */
+
+
+SELECT * FROM monthly_sales
+    UNPIVOT(sales FOR month IN (jan, feb, mar, april))
+    ORDER BY empid;
+
++-------+-------------+-------+-------+
+| EMPID | DEPT        | MONTH | SALES |
+|-------+-------------+-------+-------|
+|     1 | electronics | JAN   |   100 |
+|     1 | electronics | FEB   |   200 |
+|     1 | electronics | MAR   |   300 |
+|     1 | electronics | APRIL |   100 |
+|     2 | clothes     | JAN   |   100 |
+|     2 | clothes     | FEB   |   300 |
+|     2 | clothes     | MAR   |   150 |
+|     2 | clothes     | APRIL |   200 |
+|     3 | cars        | JAN   |   200 |
+|     3 | cars        | FEB   |   400 |
+|     3 | cars        | MAR   |   100 |
+|     3 | cars        | APRIL |    50 |
++-------+-------------+-------+-------+
