@@ -1,0 +1,25 @@
+SEAT   STATUS
+1       1
+2       0
+3       1
+4       0
+5       1
+6       1
+7       1
+
+Q) Here fetch the seats which are empty and its immediate next seat or immediate previous seat is empty
+STATUS : 0  & STATUS : 1
+
+
+WITH CTE AS 
+(
+SELECT *,
+LEAD(STATUS) OVER(ORDER BY SEAT) AS LEAD_STATUS ,
+LAG(STATUS) OVER(ORDER BY SEAT) AS LAG_STATUS 
+FROM TABLE
+)
+SELECT SEAT FROM TABLE 
+WHERE 
+STATUS = LEAD_STATUS OR
+STATUS = LAG_STATUS 
+;
