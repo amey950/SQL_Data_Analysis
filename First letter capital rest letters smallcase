@@ -1,0 +1,6 @@
+Q) WRITE A CODE TO HAVE FIRST LETTER OF NAME IN CAPITAL AND REST OF THE LETTERS IN SMALLCASE
+
+
+SELECT 
+concat(upper(left(name,1)),lower(right(name,length(name)-1))) as name
+from users ;
